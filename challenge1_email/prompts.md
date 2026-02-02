@@ -360,17 +360,7 @@ Before writing any code, spend a moment to think or plan: outline the regex stru
 - **Real failing cases** drive the next version (v1’s 7 failures → v2 rules; v2’s hyphen false negative → v3 rules), so iteration is traceable.
 - When you need **safety and maintainability**, stating “no catastrophic backtracking” and “named subpatterns” in the prompt directly changes the implementation.
 
-### 从 Challenge 2 可补充的通用要点（适用于组件/UI/数据流场景）
 
-以下要点在 Challenge 1（纯函数 + regex）中未涉及，但在 Challenge 2（React 表格）中证明有效，可作为「写好 prompt」的补充：
-
-- **组件与数据边界：** 若生成的是可复用组件，要在 prompt 里明确写「通过 props 接收数据」「表格/组件本身不 hardcode 数据集」，否则模型容易写成单文件全 `useState`、难以复用。
-- **数据流与管道顺序：** 若有「过滤 → 排序 → 分页」等多步逻辑，要显式写出顺序和对应的纯函数（如 `filterRows` / `sortRows` / `paginateRows`），保证行为可预测、易单测。
-- **布局与稳定性：** 对表格/列表类 UI，要单独提「fixed table layout」「fixed column widths」等，避免排序/过滤时列宽变化、UI 乱跳。
-- **测试用例外置 + 引用：** 将测试用例写在独立文档（如 `test-doc.md`）中，再在 prompt 里写「assert 覆盖该文档中全部内容」或「Unit + E2E 覆盖 test-doc.md」，比只在 prompt 里举 2～3 个例子更能驱动完整、可复现的测试。
-- **可观测性与验证：** 要求 debug panel 或状态展示（如当前 filter、sort 状态、页码、总行数、last user action），便于人工和自动化验证「是否真的按预期工作」，减少「看起来过了但没测到」的情况。
-
----
 
 ## Code quality comparison
 
@@ -384,7 +374,7 @@ Before writing any code, spend a moment to think or plan: outline the regex stru
 
 **Conclusion:** v1 is good for a quick “regex + tests” check; v2 strengthens rules and case count and works as a correctness baseline; v3 keeps high pass rate while improving maintainability (named subpatterns), safety (pre-checks + less backtracking), and reuse (export, input checks), and passes all 16 custom cases.
 
----
+
 
 ## Test results summary
 
