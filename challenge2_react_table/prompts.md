@@ -116,16 +116,18 @@ Keep the implementation straightforward
 You are a senior React + TypeScript engineer designing a correct,
 stable, and verifiable data table component.
 
-Context
+<context>
 This Artifact is meant to demonstrate production-minded UI logic:
 clear data flow, predictable behavior, and visible verification.
 The focus is not visual polish, but correctness and structure.
+</context>
 
-Task
+<task>
 Create an interactive Claude Artifact that renders a sortable,
 filterable, and paginated table for employee data.
+</task>
 
-Data model
+<data_model>
 Use proper TypeScript types, for example, this exact type:
 type Employee = {
   id: string;
@@ -135,28 +137,32 @@ type Employee = {
   salary: number;
   startDate: string; // YYYY-MM-DD
 };
+</data_model>
 
-Component structure
+<component_structure>
 - Implement a reusable table component that receives data via props.
 - The Artifact may manage imported data at the top level,
   but the table itself must not hardcode its dataset.
+</component_structure>
 
-Sorting requirements
+<sorting_requirements>
 - Support multi-column sorting (up to 2 columns).
 - Clicking a column header cycles: not sorted → ascending → descending → not sorted.
 - Sorting must be stable:
   if two rows compare equal on all active sort keys,
   their original relative order must be preserved.
 - Show sort direction and sort priority (1 / 2) in the header.
+</sorting_requirements>
 
-Filtering requirements
+<filtering_requirements>
 - Provide a single text input that filters rows across all visible columns.
 - Filtering is case-insensitive.
 - When the filter query changes, reset to page 1.
 - If no rows match, display a clear empty state message:
   “No results found”.
+</filtering_requirements>
 
-Pagination requirements
+<pagination_requirements>
 - Provide:
   - Previous / Next buttons
   - A way to jump directly to a page number
@@ -165,20 +171,23 @@ Pagination requirements
   - a numeric input that allows custom values (e.g. 7, 13).
 - When page size changes, reset to page 1.
 - Display total rows, filtered rows, and total pages.
+</pagination_requirements>
 
-Layout stability
+<layout_stability>
 - Prevent layout or column width shifts when sorting or filtering.
 - Use a fixed table layout and fixed column widths.
+</layout_stability>
 
-Import-to-test feature
+<import_to_test>
 Include an “Import to test” section with:
 - A textarea where users can paste a JSON array of Employee objects
 - An Import button that parses the JSON
 - Graceful error handling if parsing fails
 - Validation that each object contains all required Employee fields
 - A “Load sample data (100 rows)” button for quick testing
+</import_to_test>
 
-Data pipeline (important)
+<data_pipeline>
 Implement and use typed pure helper functions:
 1) filterRows(rows, query, columns)
 2) sortRows(rows, sortState)
@@ -186,26 +195,36 @@ Implement and use typed pure helper functions:
 
 Apply these steps in this exact order:
 filter → sort → paginate
+</data_pipeline>
 
-Verification & testing
-Make two test buttons to check both Unit tests and End-to-end (E2E) tests, assert checks covering everything inside the test-doc.md file. 
+<verification_testing>
+Make two test buttons to check both Unit tests and End-to-end (E2E) tests, assert checks covering everything inside the test-doc.md file.
+</verification_testing>
 
-Output
+<output>
 Return one interactive Artifact. Strict TypeScript typing, no `any`.
 Keep UI clean; correctness should be demonstrated by tests + debug panel.
+</output>
 
-Debug visibility
+<debug_visibility>
 At the bottom of the Artifact, display a compact debug panel showing:
 - current filter query
 - active sort keys, directions, and priority
 - page number and page size
 - total rows, filtered rows, total pages
 - last user action (e.g. “sorted salary asc”, “imported 100 rows”)
+</debug_visibility>
 
-Output constraints
+<output_constraints>
 - Return one interactive Artifact only.
 - Use strict TypeScript typing (no `any`).
 - Keep comments concise and practical.
+</output_constraints>
+
+<planning>
+Before writing any code, spend a moment to think or plan: outline the main components (e.g. data flow, table component, filter/sort/paginate pipeline, import validation, test harness), the order of implementation, and edge cases (empty data, invalid JSON, stable sort). 
+</planning>
+
 
 ### Screenshot
 
